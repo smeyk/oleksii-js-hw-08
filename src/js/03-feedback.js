@@ -5,19 +5,18 @@ const form = document.querySelector('.feedback-form')
 
 let dataForm = JSON.parse(localStorage.getItem(STORAGE_FORM_DATA)) || {};
 const { email, message } = form.elements;
-loadPage();
+
+if (dataForm) {
+	email.value = dataForm.email || '';
+	message.value = dataForm.message || '';
+}
+
 
 const checkFields = () => {
 	dataForm = { email: email.value, message: message.value };
 	localStorage.setItem(STORAGE_FORM_DATA, JSON.stringify(dataForm));
 }
 
-function loadPage() {
-	if (dataForm) {
-		email.value = dataForm.email || '';
-		message.value = dataForm.message || '';
-	}
-}
 
 const onFormSubmit = (event) => {
 	event.preventDefault();
