@@ -1,13 +1,15 @@
 import throttle from 'lodash.throttle';
+const STORAGE_FORM_DATA = "feedback-form-state";
 
 const form = document.querySelector('.feedback-form')
-let dataForm = JSON.parse(localStorage.getItem("feedback-form-state")) || {};
+
+let dataForm = JSON.parse(localStorage.getItem(STORAGE_FORM_DATA)) || {};
 const { email, message } = form.elements;
 loadPage();
 
 const checkFields = () => {
 	dataForm = { email: email.value, message: message.value };
-	localStorage.setItem("feedback-form-state", JSON.stringify(dataForm));
+	localStorage.setItem(STORAGE_FORM_DATA, JSON.stringify(dataForm));
 }
 
 function loadPage() {
@@ -23,7 +25,7 @@ const onFormSubmit = (event) => {
 		console.log({ email: email.value, message: message.value })
 	}
 	event.currentTarget.reset();
-	localStorage.removeItem("feedback-form-state");
+	localStorage.removeItem(STORAGE_FORM_DATA);
 	dataForm = {};
 }
 
